@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Dec 14 16:14:36 2021
-
-@author: NTU
-"""
-
 import client
 from datetime import datetime
 import numpy as np
