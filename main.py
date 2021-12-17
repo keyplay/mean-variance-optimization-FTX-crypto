@@ -1,8 +1,17 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Dec 14 16:14:36 2021
+
+@author: NTU
+"""
+
 import client
 from datetime import datetime
 import numpy as np
 from optimization import mini_vol, portfolio_info
 import matplotlib.pyplot as plt
+import json
+import os
 
 def jsonParser(json_ele):
     return [json_ele['time'], json_ele['close']]
@@ -12,9 +21,10 @@ api_key=''
 api_secret=''
 
 subaccount_name='All'
-tickers = ['BTC-PERP', 'ETH-PERP', 'ADA-PERP']
+tickers = ['BTC-PERP', 'ETH-PERP', 'ADA-PERP', 'EOS-PERP']
 resolution = 3600   # interval 1 hour
 freq = 365 * 24
+output_path = 'result'
 
 start_time_str = '2021-10-01T00:00:00+0000'
 end_time_str = '2021-10-31T23:00:00+0000'
@@ -22,6 +32,8 @@ end_time_str = '2021-10-31T23:00:00+0000'
 start_time = int(datetime.timestamp(datetime.strptime(start_time_str, '%Y-%m-%dT%H:%M:%S%z')))
 end_time = int(datetime.timestamp(datetime.strptime(end_time_str, '%Y-%m-%dT%H:%M:%S%z')))
 
+if not os.path.exists(output_path):
+    os.makedirs(output_path)
 # ----------- get historical data and calculate return ------------
 ret_ave = []
 ret_list = []
@@ -37,7 +49,7 @@ cov = np.matrix(np.cov(ret_list) * freq)
 ret_ave = np.array(ret_ave)
 
 # ------------ mean-variance optimization ------------
-expected_ret = 0.1
+expected_ret = 0.05
 weight = mini_vol(len(tickers), ret_ave.reshape((-1,1)), cov, expected_ret)
 result = {}
 for i in range(len(tickers)):
@@ -45,6 +57,8 @@ for i in range(len(tickers)):
 
 print(result)
 
+with open(os.path.join(output_path, 'weight.txt'), 'w') as convert_file:
+     convert_file.write(json.dumps(result))
 # -------------- ploting of mean-variance efficient frontier ------------
 port_ret_list = []
 port_std_list = []
@@ -63,3 +77,4 @@ plt.grid(True)
 plt.xlabel('excepted volatility')
 plt.ylabel('expected return')
 plt.colorbar(label = 'Sharpe ratio')   
+plt.savefig(os.path.join(output_path, 'frontier.png'))
