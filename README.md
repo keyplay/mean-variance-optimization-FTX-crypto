@@ -19,9 +19,9 @@ This file implementes the mean-variance optimization, which includes:
 2. function portfolio_info return the return and standard deviation of portfolio
 
 #### main.py
-This file is the main entry of the program. Ticker name, time interval of data, start time and end time of data should be specified.
-Weights for each ticker will be printed.
-The figure of mean-variance efficient frontier will be plotted.
+This file is the main entry of the program. Output path of result, ticker name, time interval of data, start time and end time of data should be specified.
+Weights for each ticker will be printed and saved in the specified location.
+The figure of mean-variance efficient frontier will be plotted and saved in the specified location.
 
 ## Running
 running the program by using command:
