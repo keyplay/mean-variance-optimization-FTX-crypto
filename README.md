@@ -20,7 +20,9 @@ This file implementes the mean-variance optimization, which includes:
 
 #### main.py
 This file is the main entry of the program. Output path of result, ticker name, time interval of data, start time and end time of data should be specified.
+
 Weights for each ticker will be printed and saved in the specified location.
+
 The figure of mean-variance efficient frontier will be plotted and saved in the specified location.
 
 ## Running
