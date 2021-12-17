@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Dec 17 15:28:22 2021
-
-@author: NTU
-"""
 import numpy as np
 
 def mini_vol(number, ret_ave, ret_cov, target_ret):
