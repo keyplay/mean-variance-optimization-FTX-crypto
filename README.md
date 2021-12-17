@@ -1,4 +1,4 @@
-# RAID6-implementation
+# Implementation of mean variance optimization with FTX market data connection
 
 ## Code
 The code is implemented with Python3.7 to create an optimal portfolio using free historical data from the FTX Markets RESTful API.
